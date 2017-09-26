@@ -36,7 +36,6 @@ public class WorkShopSectionAdapter extends BaseArrayRecyclerAdapter<MWorkshopSe
     private int viewType;
     private boolean addTask;
     private OnAddTaskListener addTaskListener;
-    private String startTime, endTime;
     private OnTaskEditListener onTaskEditListener;
     private AddActivityCallBack addActivityCallBack;
     private int mainPosition = -1, childPosition = -1;

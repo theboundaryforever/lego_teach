@@ -279,7 +279,7 @@
                         android:layout_toRightOf="@+id/markType"
                         android:paddingLeft="@dimen/margin_size_10"
                         android:text="已互评0个/0个"
-                        android:textSize="@dimen/margin_size_10" />
+                        android:textSize="@dimen/font_size_15" />
 
                     <TextView
                         android:id="@+id/owntotal_percent"

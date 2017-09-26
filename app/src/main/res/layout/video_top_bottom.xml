@@ -15,9 +15,9 @@
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignTop="@+id/video_title"
             android:layout_alignBottom="@+id/video_title"
+            android:layout_alignTop="@+id/video_title"
+            android:layout_centerVertical="true"
             android:paddingLeft="@dimen/margin_size_6"
             android:paddingRight="@dimen/margin_size_6"
             android:src="@drawable/fanhui" />
@@ -41,14 +41,14 @@
             android:id="@+id/my_video_zhangjie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/video_title"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/video_title"
-            android:layout_alignBottom="@+id/video_title"
+            android:drawableLeft="@drawable/zhangjie"
+            android:drawablePadding="@dimen/margin_size_6"
             android:gravity="center"
             android:paddingLeft="@dimen/margin_size_4"
             android:paddingRight="@dimen/margin_size_6"
-            android:drawableLeft="@drawable/zhangjie"
-            android:drawablePadding="@dimen/margin_size_6"
             android:text="课前导读"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_16" />
@@ -58,7 +58,7 @@
     <RelativeLayout
         android:id="@+id/bottomControll"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/margin_size_40"
         android:layout_alignParentBottom="true"
         android:background="@android:color/background_dark"
         android:visibility="invisible">
@@ -67,7 +67,8 @@
             android:id="@+id/video_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/_margin_size_10"
+            android:padding="@dimen/margin_size_8"
             android:src="@drawable/ic_play" />
 
         <SeekBar
@@ -76,55 +77,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="3dp"
             android:layout_toLeftOf="@+id/currentTime"
             android:layout_toRightOf="@+id/video_play"
             android:focusable="true"
-            android:maxHeight="8dp"
-            android:minHeight="5dp"
-            android:paddingLeft="3dp"
+            android:maxHeight="@dimen/margin_size_8"
+            android:minHeight="@dimen/margin_size_5"
             android:progressDrawable="@drawable/mn_player_progress_diy"
             android:thumb="@drawable/mn_player_thumb"
             android:thumbOffset="0dp" />
 
-        <ImageView
-            android:id="@+id/video_full"
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/quanping"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/download_yun"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/video_full"
-            android:visibility="gone" />
 
         <TextView
             android:id="@+id/currentTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/totalTime"
-            android:text="00:00"
+            android:layout_margin="@dimen/_margin_size_10"
+            android:padding="@dimen/margin_size_8"
+            android:paddingRight="@dimen/_margin_size_10"
+            android:text="00:00/00:00"
             android:textColor="@color/colorPlayerProgressSecond"
             android:textSize="@dimen/font_size_16" />
 
-        <TextView
-            android:id="@+id/totalTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin_size_6"
-            android:layout_toLeftOf="@+id/download_yun"
-            android:text="/00:00"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/font_size_16" />
+
     </RelativeLayout>
 
 </RelativeLayout>

@@ -5,7 +5,6 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Config;
 
 import com.haoyu.app.activity.AppSplashActivity;
 import com.haoyu.app.activity.TeacherHomePageActivity;
@@ -30,10 +29,10 @@ public class GdeiApplication extends Application {
         instance = this;
         ZXingLibrary.initDisplayOpinion(this);
         initFileDownloader();
-        // 以下用来捕获程序崩溃异常
-        if (!Config.DEBUG) {
-            Thread.setDefaultUncaughtExceptionHandler(restartHandler); // 程序崩溃时触发线程
-        }
+//        // 以下用来捕获程序崩溃异常
+//        if (!Config.DEBUG) {
+//            Thread.setDefaultUncaughtExceptionHandler(restartHandler); // 程序崩溃时触发线程
+//        }
     }
 
     private void initFileDownloader() {

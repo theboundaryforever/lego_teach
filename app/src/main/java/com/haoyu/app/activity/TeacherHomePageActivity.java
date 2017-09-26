@@ -3,7 +3,9 @@ package com.haoyu.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,7 +56,6 @@ public class TeacherHomePageActivity extends BaseActivity implements View.OnClic
     @BindView(R.id.iv_scan)
     View iv_scan;
     private SlidingMenu menu;
-    private View MenuView;
     private ImageView iv_userIco;   //侧滑菜单用户头像
     private TextView tv_userName;   //侧滑菜单用户名
     private TextView tv_deptName;   //侧滑菜单用户部门名称
@@ -86,7 +87,7 @@ public class TeacherHomePageActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void initView() {
-        menu = new SlidingMenu(this);
+        menu = new SlidingMenu(context);
         menu.setMode(SlidingMenu.LEFT);
         // 设置触摸屏幕的模式
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
@@ -96,10 +97,9 @@ public class TeacherHomePageActivity extends BaseActivity implements View.OnClic
         // 设置渐入渐出效果的值
         menu.setFadeDegree(0.35f);
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        //为侧滑菜单设置布局
-        MenuView = getLayoutInflater().inflate(R.layout.app_homepage_menu, null);
-        initMenuView(MenuView);
-        menu.setMenu(MenuView);
+        View menuView = LayoutInflater.from(context).inflate(R.layout.app_homepage_menu, null);
+        initMenuView(menuView);
+        menu.setMenu(menuView);
         FullyLinearLayoutManager courseManager = new FullyLinearLayoutManager(context);
         courseManager.setOrientation(FullyLinearLayoutManager.VERTICAL);
         courseRV.setLayoutManager(courseManager);
@@ -116,25 +116,31 @@ public class TeacherHomePageActivity extends BaseActivity implements View.OnClic
     }
 
     private void initMenuView(View menuView) {
-        View ll_userInfo = getView(menuView, R.id.ll_userInfo);
+        View ll_userInfo = menuView.findViewById(R.id.ll_userInfo);
         ll_userInfo.setOnClickListener(context);
-        iv_userIco = getView(menuView, R.id.iv_userIco);
+        iv_userIco = menuView.findViewById(R.id.iv_userIco);
         GlideImgManager.loadCircleImage(context, getAvatar()
                 , R.drawable.user_default, R.drawable.user_default, iv_userIco);
         iv_userIco.setOnClickListener(context);
-        tv_userName = getView(menuView, R.id.tv_userName);
-        tv_userName.setText(getRealName());
-        tv_deptName = getView(menuView, R.id.tv_deptName);
-        tv_deptName.setText(getDeptName());
-        TextView tv_education = getView(menuView, R.id.tv_education);
+        tv_userName = menuView.findViewById(R.id.tv_userName);
+        tv_deptName = menuView.findViewById(R.id.tv_deptName);
+        if (TextUtils.isEmpty(getRealName()))
+            tv_userName.setText("请填写用户名");
+        else
+            tv_userName.setText(getRealName());
+        if (TextUtils.isEmpty(getDeptName()))
+            tv_deptName.setText("请选择单位");
+        else
+            tv_deptName.setText(getDeptName());
+        TextView tv_education = menuView.findViewById(R.id.tv_education);
         tv_education.setOnClickListener(context);
-        TextView tv_teaching = getView(menuView, R.id.tv_teaching);
+        TextView tv_teaching = menuView.findViewById(R.id.tv_teaching);
         tv_teaching.setOnClickListener(context);
-        TextView tv_message = getView(menuView, R.id.tv_message);
+        TextView tv_message = menuView.findViewById(R.id.tv_message);
         tv_message.setOnClickListener(context);
-        TextView tv_consulting = getView(menuView, R.id.tv_consulting);
+        TextView tv_consulting = menuView.findViewById(R.id.tv_consulting);
         tv_consulting.setOnClickListener(context);
-        TextView tv_settings = getView(menuView, R.id.tv_settings);
+        TextView tv_settings = menuView.findViewById(R.id.tv_settings);
         tv_settings.setOnClickListener(context);
     }
 

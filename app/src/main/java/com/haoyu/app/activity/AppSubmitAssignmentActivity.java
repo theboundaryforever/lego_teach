@@ -88,7 +88,6 @@ public class AppSubmitAssignmentActivity extends BaseActivity implements View.On
     public void setListener() {
         iv_add.setOnClickListener(context);
 
-
         toolBar.setOnLeftClickListener(new AppToolBar.OnLeftClickListener() {
             @Override
             public void onLeftClick(View view) {

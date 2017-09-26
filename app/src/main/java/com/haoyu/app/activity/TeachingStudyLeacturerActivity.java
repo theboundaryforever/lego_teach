@@ -102,9 +102,6 @@ public class TeachingStudyLeacturerActivity extends BaseActivity implements View
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
             case R.id.rl_search:
                 userName = et_name.getText().toString().trim();
                 if (userName.length() == 0) {

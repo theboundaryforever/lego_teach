@@ -213,6 +213,8 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
                             hideWarnControll();
                             videoViewStart();
                             mVideoView.seekTo(videoPosition);
+
+
                         }
                     }
 
@@ -290,12 +292,12 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
         String action = event.getAction();
         if (action.equals(Constants.speedAction)) {
             String obj = event.getObj().toString();
-
             if (!isLocal) {
                 netType = obj;
                 if (NONE.equals(obj)) {
                     //没有网络
                     mVideoView.pause();
+                    warnContent.setText("没有网络，请开启网络");
                     showWarnControll();
                 } else if (WIFI.equals(obj)) {
                     hideWarnControll();
@@ -394,11 +396,13 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
 
     private void initContent() {
         mVideoPath = getIntent().getStringExtra("videoUrl");
+
         summary = getIntent().getStringExtra("summary");
         String fileName = getIntent().getStringExtra("fileName");
         String activityTitle = getIntent().getStringExtra("activityTitle");
         seekTime = (long) getIntent().getDoubleExtra("lastViewTime", 0);
         interval = getIntent().getIntExtra("interval", 30);
+
         if (summary == null && mFileInfoList.size() == 0) {
             mRead.setVisibility(View.GONE);
         }
@@ -629,9 +633,11 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
     private PLMediaPlayer.OnPreparedListener mOnPreparedListener = new PLMediaPlayer.OnPreparedListener() {
         @Override
         public void onPrepared(PLMediaPlayer plMediaPlayer) {
+
             if (mVideoView != null && mVideoView.getDuration() != -1) {
                 setVideoProgress();
                 hideLoading();
+                isReCheck = false;
                 length = mVideoView.getDuration();
                 mVideoView.setDisplayAspectRatio(mVideoView.ASPECT_RATIO_16_9);
                 mVideoView.start();
@@ -639,11 +645,8 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
                 if (seekTime > 0) {
                     mVideoView.seekTo(seekTime);
                 }
-                if (!isReCheck && netType != NONE && netType != WIFI) {
-                    mVideoView.pause();
-                    isReCheck = false;
-                }
             }
+
 
         }
     };
@@ -1120,7 +1123,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
         if (running) {
             if (type != null) {
                 if (type.equals("course")) {
-                    url = Constants.OUTRT_NET + "/" + activityId + "/study/m/video/user/" + videoId + "/updateVideoStatus";
+                    url = Constants.OUTRT_NET + "/" + activityId + "/teach/m/video/user/" + videoId + "/updateVideoStatus";
                 } else if (type.equals("workshop")) {
                     url = Constants.OUTRT_NET + "/student_" + workshopId + "/m/video/user/" + videoId + "/updateVideoStatus";
                 }
@@ -1183,7 +1186,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
         if (running) {
             if (type != null) {
                 if (type.equals("course")) {
-                    url = Constants.OUTRT_NET + "/" + activityId + "/study/m/video/user/" + videoId + "/removeVideoStatus";
+                    url = Constants.OUTRT_NET + "/" + activityId + "/teach/m/video/user/" + videoId + "/removeVideoStatus";
                 } else if (type.equals("workshop")) {
                     url = Constants.OUTRT_NET + "/student_" + workshopId + "/m/video/user/{id}/removeVideoStatus";
                 }

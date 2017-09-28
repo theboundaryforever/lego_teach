@@ -213,8 +213,6 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
                             hideWarnControll();
                             videoViewStart();
                             mVideoView.seekTo(videoPosition);
-
-
                         }
                     }
 
@@ -312,6 +310,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
 
                     }
                 } else {
+                    hideLoading();
                     hideWarnControll();
                     if (!isNet) {
                         mVideoView.pause();
@@ -630,11 +629,9 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
     private PLMediaPlayer.OnPreparedListener mOnPreparedListener = new PLMediaPlayer.OnPreparedListener() {
         @Override
         public void onPrepared(PLMediaPlayer plMediaPlayer) {
-
             if (mVideoView != null && mVideoView.getDuration() != -1) {
                 setVideoProgress();
                 hideLoading();
-                isReCheck = false;
                 length = mVideoView.getDuration();
                 mVideoView.setDisplayAspectRatio(mVideoView.ASPECT_RATIO_16_9);
                 mVideoView.start();
@@ -642,8 +639,11 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
                 if (seekTime > 0) {
                     mVideoView.seekTo(seekTime);
                 }
+                if (!isReCheck && netType != NONE && netType != WIFI) {
+                    mVideoView.pause();
+                    isReCheck = false;
+                }
             }
-
 
         }
     };

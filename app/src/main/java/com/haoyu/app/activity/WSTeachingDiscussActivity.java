@@ -36,7 +36,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 创建日期：2017/5/27 on 15:30
+ * 创建日期：2017/5/27
  * 描述：工作坊添加教学研讨活动
  * 作者:马飞奔 Administrator
  */
@@ -295,7 +295,7 @@ public class WSTeachingDiscussActivity extends BaseActivity implements View.OnCl
         Map<String, String> map = new HashMap<>();
         map.put("activity.attributeMap[main_post_num].attrValue", mainCount);
         map.put("activity.attributeMap[sub_post_num].attrValue", childCount);
-        map.put("_method", "PUT");
+
         String json = OkHttpClientManager.postAsString(context, url, map);
         Gson gson = new GsonBuilder().create();
         BaseResponseResult result = gson.fromJson(json, BaseResponseResult.class);

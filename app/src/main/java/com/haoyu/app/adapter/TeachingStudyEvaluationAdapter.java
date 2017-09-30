@@ -41,11 +41,7 @@ public class TeachingStudyEvaluationAdapter extends BaseArrayRecyclerAdapter<MEv
             if (mobileUser.getRealName() != null) {
                 tv_name.setText(mobileUser.getRealName());
             }
-        /*    Glide.with(context)
-                    .load(mobileUser.getAvatar())
-                    .placeholder(R.drawable.course_de_pic)
-                    .error(R.drawable.user_default)
-                    .dontAnimate().into(iv_img);*/
+
             GlideImgManager.loadCircleImage(context,mobileUser.getAvatar()
                     , R.drawable.user_default, R.drawable.user_default, iv_img);
         } else {
